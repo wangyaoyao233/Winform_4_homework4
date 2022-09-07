@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseLibrary;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -7,8 +8,6 @@ namespace Winform_4_homework4.Base
     public class BaseAct<T>
     {
         List<T> list = new List<T>();
-        //总收入或总支出
-        static decimal totalAmount = 0;
 
         // 获取list数量(记录数)
         public int ListCnt { get { return this.list.Count; } }
@@ -123,12 +122,19 @@ namespace Winform_4_homework4.Base
         /// 计算总收入或总支出
         /// </summary>
         /// <param name="t"></param>
-        public decimal CalTotalAmount(T t)
+        public void CalTotalAmount(T t)
         {
             Type type = typeof(T);
             decimal.TryParse(type.GetProperty("Amount").GetValue(t).ToString(), out decimal result);
-            totalAmount += result;
-            return totalAmount;
+            
+            if(t is IncomeRecord)
+            {
+                ComUtility.TotalIncome += result;
+            }
+            else if (t is ExpendRecord)
+            {
+                ComUtility.TotalExpend += result;
+            }
         }
     }
 }

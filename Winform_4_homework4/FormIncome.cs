@@ -47,7 +47,8 @@ namespace Winform_4_homework4
             }
 
             labelShow.Text += baseAct.GetInfo(incomeRecord);
-            labelTotalAmount.Text = baseAct.CalTotalAmount(incomeRecord).ToString("0.00");
+            baseAct.CalTotalAmount(incomeRecord);
+            labelTotalAmount.Text = ComUtility.TotalIncome.ToString("0.00");
 
             this.ResetValue();
         }

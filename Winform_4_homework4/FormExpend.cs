@@ -57,9 +57,11 @@ namespace Winform_4_homework4
             new ShowExpend((ExpendRecord info) =>
             {
                 this.labelShow.Text += baseAct.GetInfo(info);
-                this.labelTotalAmount.Text = $"总金额: {baseAct.CalTotalAmount(info).ToString("0.00")}";
-                this.textAmount.Text = info.Amount.ToString("0.00");
             }).Invoke(expendRecord);
+
+            baseAct.CalTotalAmount(expendRecord);
+            this.labelTotalAmount.Text = $"总金额: {ComUtility.TotalExpend.ToString("0.00")}";
+            this.textAmount.Text = amount.ToString("0.00");
 
             this.ResetValue();
         }

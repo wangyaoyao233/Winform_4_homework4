@@ -18,38 +18,45 @@ namespace Winform_4_homework4
         decimal totalExpend = 0;
         private void button1_Click(object sender, EventArgs e)
         {
-            Action action1 = () => this.labelShow.Text += "欢迎进入记账本系统！\n";
-            action1.Invoke();
+            Action actions = null;
 
-            Action action2 = () =>
+            actions += () => this.labelShow.Text += "欢迎进入记账本系统！\n";
+
+            actions += () =>
             {
-                this.labelShow.Text += "请先登录系统，输入账号：XXX,密码：XXXXXX；\n";
+                this.labelShow.Text += "请先登录系统，输入账号,密码；\n";
                 //以下会卡线程
                 string account = Console.ReadLine();
                 string password = Console.ReadLine();
                 this.labelShow.Text += $"账号：{account},密码：{password}；\n";
             };
-            action2.Invoke();
 
-            Action action3 = () =>
+            actions += () =>
             {
                 this.labelShow.Text += "请添加名目信息\n";
             };
-            action3.Invoke();
 
-            Action action4 = () =>
+            actions += () =>
             {
                 this.labelShow.Text += "请录入收入记录\n";
                 //输入
                 //添加到 totalIncome
+                string income = Console.ReadLine();
+                totalIncome += decimal.Parse(income);
+                this.labelShow.Text += $"记录: {income}";
             };
 
-            Action action5 = () =>
+            actions += () =>
             {
                 this.labelShow.Text += "请录入支出记录\n";
                 //输入
                 //添加到totalExpend
+                string expend = Console.ReadLine();
+                totalExpend += decimal.Parse(expend);
+                this.labelShow.Text += $"记录: {expend}";
             };
+
+            actions.Invoke();
 
             Func<decimal> func = () =>
             {

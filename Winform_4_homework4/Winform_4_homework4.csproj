@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseAct.cs" />
+    <Compile Include="ComUtility.cs" />
     <Compile Include="FormActionFunc.cs">
       <SubType>Form</SubType>
     </Compile>
